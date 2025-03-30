@@ -68,7 +68,7 @@ public class LoginTests {
             "chromedriver",
             "geckodriver"
     })
-    void loginSystem(String driverName) {
+    void loginSystem(String driverName) throws InterruptedException {
         init(driverName);
         driver.get("https://spb.hh.ru/account/login/");
         driver.findElement(By.xpath(
@@ -85,6 +85,7 @@ public class LoginTests {
         WebElement button = driver.findElement(By.xpath(
                 "/html/body/div[5]/div/div[1]/div[4]/div[1]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/div/form/div[8]/button"));
         button.click();
+        Thread.sleep(1000);
         String result = js.executeScript("return window.location.href").toString();
         assertEquals(result, "https://spb.hh.ru/?hhtmFrom=account_login");
     }
